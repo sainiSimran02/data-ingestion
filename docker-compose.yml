@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15 # Use PostgreSQL version 15
+    container_name: infilect_postgres # Name of the container
+    restart: always # Auto restart if it crashes
+    environment:
+      POSTGRES_DB: ${DB_NAME} # Database name
+      POSTGRES_USER: ${DB_USER} # Username
+      POSTGRES_PASSWORD: ${DB_PASSWORD} # Password
+    ports:
+      - "${DB_PORT}:5432" # Expose PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Save data even if container restarts
+
+volumes:
+  postgres_data: # Named volume to persist data
